@@ -1,0 +1,9 @@
+DUT (RTL, design)
+timp simulare (1s in real = 7 zile simulare) vs timp executie
+perioada, faza(offset), factor de umplere
+
+logic [31:0] t - registru
+logic t [0:31] - array
+frecv in sistem e data de calea cea mai lunga intre 2 bistabile
+
+tema: adaugare rezultat signed de marime dubla
