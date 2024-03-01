@@ -16,6 +16,7 @@ module top;
   logic          load_en;
   logic          reset_n;
   opcode_t       opcode;
+  result_t       rezultat;
   operand_t      operand_a, operand_b;
   address_t      write_pointer, read_pointer;
   instruction_t  instruction_word;

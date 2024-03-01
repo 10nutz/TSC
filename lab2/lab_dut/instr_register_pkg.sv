@@ -17,6 +17,8 @@ package instr_register_pkg; //declara package
   } opcode_t; //operatiile dut-ului
 
   typedef logic signed [31:0] operand_t;
+
+  typedef logic signed [63:0] result_t;
   //daca nu specificam logic e unsigned
   typedef logic [4:0] address_t; //32 de adrese
   
@@ -24,6 +26,7 @@ package instr_register_pkg; //declara package
     opcode_t  opc;
     operand_t op_a;
     operand_t op_b; //adaug rezultat
+    result_t rezultat;
   } instruction_t;
 
 endpackage: instr_register_pkg
