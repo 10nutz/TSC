@@ -82,14 +82,21 @@ module instr_register_test //declaram modul
     // write_pointer values in a later lab
     //
     static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
-    operand_a     <= $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15
-    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+    operand_t op_A, op_B;
+    opcode_t opCode;
+
+    op_A     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
+    op_B     = $unsigned($random)%16;            // between 0 and 15
+    opCode   = opcode_t'($unsigned($random)%8);
+    
+    operand_a     <= op_A;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
+    operand_b     <= op_B;            // between 0 and 15
+    opcode        <= opCode;  // between 0 and 7, cast to opcode_t type
     write_pointer <= temp++; //initital primeste 0 pentru ca  ++ e dupa - prima oara se asigneaza si apoi se incrementeaza
-    iw_reg_test[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}}; // <= nebloncanta = blocanta
-    $display("salvez  opcode = %0d (%s)", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name);
-    $display("salvez  operand_a = %0d",   iw_reg_test[write_pointer].op_a);
-    $display("salvez  operand_b = %0d\n", iw_reg_test[write_pointer].op_b);
+    iw_reg_test[write_pointer] = '{opCode,op_A,op_B, {64{1'b0}}}; // <= nebloncanta = blocanta
+    //$display("salvez  opcode = %0d (%s)", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name);
+    //$display("salvez  operand_a = %0d",   iw_reg_test[write_pointer].op_a);
+    //$display("salvez  operand_b = %0d\n", iw_reg_test[write_pointer].op_b);
   endfunction: randomize_transaction
 
   function void print_transaction;
