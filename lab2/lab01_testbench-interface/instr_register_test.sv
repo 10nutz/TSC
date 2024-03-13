@@ -25,15 +25,17 @@ module instr_register_test //declaram modul
   result_t rezultat_test;
   instruction_t  iw_reg_test [0:31];
   
-  parameter WR_NR = 20;
-  parameter RD_NR = 20;
+  parameter WR_NR = 3;
+  parameter RD_NR = 3;
+  parameter READ_ORDER = 1;
+  parameter WRITE_ORDER = 1;
 
   initial begin
-    $display("\n\n***********************************************************");
-    $display(    "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
-    $display(    "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
-    $display(    "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
-    $display(    "***********************************************************");
+    $display("\n***********************************************************");
+    $display(  "***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***");
+    $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
+    $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
+    $display(  "***********************************************************\n");
 
     $display("\nReseting the instruction register...");
     write_pointer  = 5'h00;         // initialize write pointer
@@ -55,22 +57,45 @@ module instr_register_test //declaram modul
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
     //for (int i=0; i<=2; i++) begin io 06.03.2024
+
+
     for (int i=0; i<=RD_NR-1; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
-      @(posedge clk) read_pointer = i;
-      @(negedge clk) print_results;
-      check_result;
-    end
+      case(READ_ORDER)
+      0: begin
+        @(posedge clk) read_pointer = i;
+        @(negedge clk) print_results;
+        check_result;
+      end
+      1: begin
+        @(posedge clk) read_pointer = (31 - i%32);
+        @(negedge clk) print_results;
+        check_result;
+      end
+      2: begin
+        @(posedge clk) read_pointer = $unsigned($random)%32;
+        @(negedge clk) print_results;
+        check_result;
+      end
+      default: begin
+        @(posedge clk) read_pointer = i;
+        @(negedge clk) print_results;
+        check_result;
+      end
+      endcase
+      
+
 
     @(posedge clk) ;
     $display("\n***********************************************************");
-    $display(  "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
+    $display(  "***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***");
     $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
     $finish;
+  end
   end
 
   function void randomize_transaction;
@@ -81,31 +106,50 @@ module instr_register_test //declaram modul
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
     //
-    static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
+    int wp;
+    case(WRITE_ORDER)
+      0: begin
+        static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
+        wp = temp++;
+       end
+      1: begin
+        static int temp = 31; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
+        wp = temp--;
+       end
+      2: begin 
+        static int temp = $unsigned($random)%32; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
+        wp = temp++;
+      end
+      default: begin //default este incremental
+        static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
+        wp = temp++;
+      end
+    endcase
+
     operand_t op_A, op_B;
     opcode_t opCode;
-    int wp;
-
+        
     op_A     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
     op_B     = $unsigned($random)%16;            // between 0 and 15
     opCode   = opcode_t'($unsigned($random)%8);
-    wp = temp++;
-    
+
     operand_a     <= op_A;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
     operand_b     <= op_B;            // between 0 and 15
     opcode        <= opCode;  // between 0 and 7, cast to opcode_t type
     write_pointer <= wp; //initital primeste 0 pentru ca  ++ e dupa - prima oara se asigneaza si apoi se incrementeaza
     iw_reg_test[wp] = '{opCode,op_A,op_B, {64{1'b0}}}; // <= nebloncanta = blocanta
-    //$display("salvez  opcode = %0d (%s)", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name);
-    //$display("salvez  operand_a = %0d",   iw_reg_test[write_pointer].op_a);
-    //$display("salvez  operand_b = %0d\n", iw_reg_test[write_pointer].op_b);
+
+    $display("Inainte de print");
+    $display("salvez  opcode = %0d (%s) %0t", iw_reg_test[wp].opc, iw_reg_test[wp].opc.name, $time);
+    $display("salvez  operand_a = %0d %0t",   iw_reg_test[wp].op_a, $time);
+    $display("salvez  operand_b = %0d %0t\n", iw_reg_test[wp].op_b, $time);
   endfunction: randomize_transaction
 
   function void print_transaction;
     $display("Writing to register location %0d: ", write_pointer);
-    $display("  opcode = %0d (%s)", opcode, opcode.name);
-    $display("  operand_a = %0d",   operand_a);
-    $display("  operand_b = %0d\n", operand_b);
+    $display("  opcode = %0d (%s) %0t", opcode, opcode.name, $time);
+    $display("  operand_a = %0d %0t",   operand_a, $time);
+    $display("  operand_b = %0d %0t\n", operand_b, $time);
   endfunction: print_transaction
 
   function void print_results;
@@ -117,7 +161,13 @@ module instr_register_test //declaram modul
   endfunction: print_results
 
   function void check_result;
-     case (iw_reg_test[read_pointer].opc)
+
+    if((iw_reg_test[read_pointer].op_a == instruction_word.op_a) && 
+       (iw_reg_test[read_pointer].op_b == instruction_word.op_b) && 
+       (iw_reg_test[read_pointer].opc == instruction_word.opc)) begin
+
+      $display("DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL..."); 
+      case (iw_reg_test[read_pointer].opc)
         ZERO: rezultat_test = {64{1'b0}};
         PASSA: rezultat_test = iw_reg_test[read_pointer].op_a;
         PASSB: rezultat_test = iw_reg_test[read_pointer].op_b;
@@ -138,6 +188,12 @@ module instr_register_test //declaram modul
       end
       else
         $display("REZULTATUL NU ESTE CEL ASTEPTAT\n");
+    
+    end
+    else
+        $display("DATELE COMPARATE NU SUNT ACELEASI.\n"); 
+
+
   endfunction: check_result
 
 endmodule: instr_register_test
