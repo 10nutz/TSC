@@ -64,28 +64,14 @@ module instr_register_test //declaram modul
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
       case(READ_ORDER)
-      0: begin
-        @(posedge clk) read_pointer = i;
-        @(negedge clk) print_results;
-        check_result;
-      end
-      1: begin
-        @(posedge clk) read_pointer = (31 - i%32);
-        @(negedge clk) print_results;
-        check_result;
-      end
-      2: begin
-        @(posedge clk) read_pointer = $unsigned($random)%32;
-        @(negedge clk) print_results;
-        check_result;
-      end
-      default: begin
-        @(posedge clk) read_pointer = i;
-        @(negedge clk) print_results;
-        check_result;
-      end
+      0: @(posedge clk) read_pointer = i;
+      1: @(posedge clk) read_pointer = (31 - i%32);
+      2: @(posedge clk) read_pointer = $unsigned($random)%32;
+      default: @(posedge clk) read_pointer = i;
       endcase
-      
+      @(negedge clk) print_results;
+        check_result;
+    end
 
 
     @(posedge clk) ;
@@ -96,7 +82,7 @@ module instr_register_test //declaram modul
     $display(  "***********************************************************\n");
     $finish;
   end
-  end
+
 
   function void randomize_transaction;
     // A later lab will replace this function with SystemVerilog
@@ -106,43 +92,40 @@ module instr_register_test //declaram modul
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
     //
-    int wp;
-    case(WRITE_ORDER)
-      0: begin
+    if(WRITE_ORDER == 0)
+      begin
         static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
-        wp = temp++;
-       end
-      1: begin
+        write_pointer = temp++;
+      end
+    else if(WRITE_ORDER == 1) begin
         static int temp = 31; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
-        wp = temp--;
+        write_pointer = temp--;
        end
-      2: begin 
-        static int temp = $unsigned($random)%32; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
-        wp = temp++;
+      else if(WRITE_ORDER == 2) begin 
+        write_pointer = $unsigned($random)%32;
       end
-      default: begin //default este incremental
+      else begin //default este incremental
         static int temp = 0; //la al doilea call nu aloca iar memorie pentru aceata variabila. practic modificarea se vede in ambele functii
-        wp = temp++;
+        write_pointer = temp++;
       end
-    endcase
 
-    operand_t op_A, op_B;
-    opcode_t opCode;
+    //operand_t op_A, op_B;
+    //opcode_t opCode;
         
-    op_A     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
-    op_B     = $unsigned($random)%16;            // between 0 and 15
-    opCode   = opcode_t'($unsigned($random)%8);
+    //op_A     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
+    //op_B     = $unsigned($random)%16;            // between 0 and 15
+    //opCode   = opcode_t'($unsigned($random)%8);
 
-    operand_a     <= op_A;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
-    operand_b     <= op_B;            // between 0 and 15
-    opcode        <= opCode;  // between 0 and 7, cast to opcode_t type
-    write_pointer <= wp; //initital primeste 0 pentru ca  ++ e dupa - prima oara se asigneaza si apoi se incrementeaza
-    iw_reg_test[wp] = '{opCode,op_A,op_B, {64{1'b0}}}; // <= nebloncanta = blocanta
+    operand_a     <= $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
+    operand_b     <= $unsigned($random)%16;            // between 0 and 15
+    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+   
+    iw_reg_test[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}}; // <= nebloncanta = blocanta
 
     $display("Inainte de print");
-    $display("salvez  opcode = %0d (%s) %0t", iw_reg_test[wp].opc, iw_reg_test[wp].opc.name, $time);
-    $display("salvez  operand_a = %0d %0t",   iw_reg_test[wp].op_a, $time);
-    $display("salvez  operand_b = %0d %0t\n", iw_reg_test[wp].op_b, $time);
+    $display("salvez  opcode = %0d (%s) %0t", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name, $time);
+    $display("salvez  operand_a = %0d %0t",   iw_reg_test[write_pointer].op_a, $time);
+    $display("salvez  operand_b = %0d %0t\n", iw_reg_test[write_pointer].op_b, $time);
   endfunction: randomize_transaction
 
   function void print_transaction;
@@ -192,8 +175,6 @@ module instr_register_test //declaram modul
     end
     else
         $display("DATELE COMPARATE NU SUNT ACELEASI.\n"); 
-
-
   endfunction: check_result
 
 endmodule: instr_register_test
