@@ -25,9 +25,9 @@ module instr_register_test //declaram modul
   result_t rezultat_test;
   instruction_t  iw_reg_test [0:31];
   
-  parameter WR_NR = 3;
+  parameter WR_NR = 20;
   parameter RD_NR = 3;
-  parameter READ_ORDER = 1;
+  parameter READ_ORDER = 2;
   parameter WRITE_ORDER = 1;
 
   initial begin
