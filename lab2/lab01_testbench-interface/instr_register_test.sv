@@ -21,13 +21,15 @@ module instr_register_test //declaram modul
   timeunit 1ns/1ns; //o ns cu pas de o ns
 
   int seed = 555;
+  int passed_tests = 0;
+  int total_tests = 0;
 
   result_t rezultat_test;
   instruction_t  iw_reg_test [0:31];
   
   parameter WR_NR = 20;
   parameter RD_NR = 3;
-  parameter READ_ORDER = 2;
+  parameter READ_ORDER = 1;
   parameter WRITE_ORDER = 1;
 
   initial begin
@@ -73,7 +75,8 @@ module instr_register_test //declaram modul
         check_result;
     end
 
-
+    @(posedge clk);
+    $display("\nTeste trecute: %0d. Teste totale: %0d.", passed_tests, total_tests);
     @(posedge clk) ;
     $display("\n***********************************************************");
     $display(  "***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***");
@@ -116,9 +119,9 @@ module instr_register_test //declaram modul
     //op_B     = $unsigned($random)%16;            // between 0 and 15
     //opCode   = opcode_t'($unsigned($random)%8);
 
-    operand_a     <= $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15
-    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+    operand_a     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
+    operand_b     = $unsigned($random)%16;            // between 0 and 15
+    opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
    
     iw_reg_test[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}}; // <= nebloncanta = blocanta
 
@@ -145,9 +148,15 @@ module instr_register_test //declaram modul
 
   function void check_result;
 
+    
+    $display(" dupa  operand_a = %0d",   iw_reg_test[read_pointer].op_a);
+    $display("dupa   operand_b = %0d", iw_reg_test[read_pointer].op_b);
+    $display(" dupa rezultat = %0d", iw_reg_test[read_pointer].opc);
+
     if((iw_reg_test[read_pointer].op_a == instruction_word.op_a) && 
        (iw_reg_test[read_pointer].op_b == instruction_word.op_b) && 
        (iw_reg_test[read_pointer].opc == instruction_word.opc)) begin
+
 
       $display("DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL..."); 
       case (iw_reg_test[read_pointer].opc)
@@ -165,16 +174,17 @@ module instr_register_test //declaram modul
         default: rezultat_test = {64{1'b0}};
       endcase
 
+      $display("Rezultatul asteptat: %0d", rezultat_test);
       if(rezultat_test === instruction_word.rezultat) begin
-        $display("Rezultatul asteptat: %0d", rezultat_test);
         $display("REZULTATUL ESTE CEL ASTEPTAT\n");
+        passed_tests++;
       end
       else
         $display("REZULTATUL NU ESTE CEL ASTEPTAT\n");
-    
     end
     else
-        $display("DATELE COMPARATE NU SUNT ACELEASI.\n"); 
+        $display("DATELE COMPARATE NU SUNT ACELEASI.\n");
+    total_tests++; 
   endfunction: check_result
 
 endmodule: instr_register_test
