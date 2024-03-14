@@ -29,8 +29,8 @@ module instr_register_test //declaram modul
   
   parameter WR_NR = 20;
   parameter RD_NR = 3;
-  parameter READ_ORDER = 1;
-  parameter WRITE_ORDER = 1;
+  int READ_ORDER;
+  int WRITE_ORDER;
 
   initial begin
     $display("\n***********************************************************");
@@ -39,40 +39,50 @@ module instr_register_test //declaram modul
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
 
-    $display("\nReseting the instruction register...");
-    write_pointer  = 5'h00;         // initialize write pointer
-    read_pointer   = 5'h1F;         // initialize read pointer
-    load_en        = 1'b0;          // initialize load control line
-    reset_n       <= 1'b0;          // assert reset_n (active low)
-    repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles //e test clock din top  
-    reset_n        = 1'b1;          // deassert reset_n (active low)
+    for (int read_order = 0; read_order < 3; read_order++) begin
+        for (int write_order = 0; write_order < 3; write_order++) begin
+            $display("\n***********************************************************");
+            $display("\nTesting with READ_ORDER = %0d, WRITE_ORDER = %0d\n", read_order, write_order);
 
-    $display("\nWriting values to register stack...");
-    @(posedge clk) load_en = 1'b1;  // enable writing to register
-    //repeat (3) begin io 06.03.2024
-    repeat (WR_NR) begin
-      @(posedge clk) randomize_transaction;
-      @(negedge clk) print_transaction;
-    end
-    @(posedge clk) load_en = 1'b0;  // turn-off writing to register
+            READ_ORDER = read_order;
+            WRITE_ORDER = write_order;
 
-    // read back and display same three register locations
-    $display("\nReading back the same register locations written...");
-    //for (int i=0; i<=2; i++) begin io 06.03.2024
+            $display("\nReseting the instruction register...");
+            write_pointer  = 5'h00;         // initialize write pointer
+            read_pointer   = 5'h1F;         // initialize read pointer
+            load_en        = 1'b0;          // initialize load control line
+            reset_n       <= 1'b0;          // assert reset_n (active low)
+            repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles //e test clock din top  
+            reset_n        = 1'b1;          // deassert reset_n (active low)
+
+            $display("\nWriting values to register stack...");
+            @(posedge clk) load_en = 1'b1;  // enable writing to register
+            //repeat (3) begin io 06.03.2024
+            repeat (WR_NR) begin
+              @(posedge clk) randomize_transaction;
+              @(negedge clk) print_transaction;
+            end
+            @(posedge clk) load_en = 1'b0;  // turn-off writing to register
+
+            // read back and display same three register locations
+            $display("\nReading back the same register locations written...");
+            //for (int i=0; i<=2; i++) begin io 06.03.2024
 
 
-    for (int i=0; i<=RD_NR-1; i++) begin
-      // later labs will replace this loop with iterating through a
-      // scoreboard to determine which addresses were written and
-      // the expected values to be read back
-      case(READ_ORDER)
-      0: @(posedge clk) read_pointer = i;
-      1: @(posedge clk) read_pointer = (31 - i%32);
-      2: @(posedge clk) read_pointer = $unsigned($random)%32;
-      default: @(posedge clk) read_pointer = i;
-      endcase
-      @(negedge clk) print_results;
-        check_result;
+            for (int i=0; i<=RD_NR-1; i++) begin
+              // later labs will replace this loop with iterating through a
+              // scoreboard to determine which addresses were written and
+              // the expected values to be read back
+              case(READ_ORDER)
+              0: @(posedge clk) read_pointer = i;
+              1: @(posedge clk) read_pointer = (31 - i%32);
+              2: @(posedge clk) read_pointer = $unsigned($random)%32;
+              default: @(posedge clk) read_pointer = i;
+              endcase
+              @(negedge clk) print_results;
+                check_result;
+            end
+        end
     end
 
     @(posedge clk);
@@ -125,10 +135,10 @@ module instr_register_test //declaram modul
    
     iw_reg_test[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}}; // <= nebloncanta = blocanta
 
-    $display("Inainte de print");
-    $display("salvez  opcode = %0d (%s) %0t", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name, $time);
-    $display("salvez  operand_a = %0d %0t",   iw_reg_test[write_pointer].op_a, $time);
-    $display("salvez  operand_b = %0d %0t\n", iw_reg_test[write_pointer].op_b, $time);
+    // $display("Inainte de print");
+    // $display("salvez  opcode = %0d (%s) %0t", iw_reg_test[write_pointer].opc, iw_reg_test[write_pointer].opc.name, $time);
+    // $display("salvez  operand_a = %0d %0t",   iw_reg_test[write_pointer].op_a, $time);
+    // $display("salvez  operand_b = %0d %0t\n", iw_reg_test[write_pointer].op_b, $time);
   endfunction: randomize_transaction
 
   function void print_transaction;
@@ -187,4 +197,6 @@ module instr_register_test //declaram modul
     total_tests++; 
   endfunction: check_result
 
+
+//daca nu initializez iw_reg_test cu 0 va pica teste cand citeste de la o locatie de memorie la care nu s-a scris
 endmodule: instr_register_test
