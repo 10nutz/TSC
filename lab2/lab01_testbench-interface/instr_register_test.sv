@@ -74,7 +74,7 @@ module instr_register_test //declaram modul
               // scoreboard to determine which addresses were written and
               // the expected values to be read back
               case(READ_ORDER)
-              0: @(posedge clk) read_pointer = i;
+              0: @(posedge clk) read_pointer = i; //nu trebuie mod 32 pentru ca read pointerul e pe 5 biti
               1: @(posedge clk) read_pointer = (31 - i%32);
               2: @(posedge clk) read_pointer = $unsigned($random)%32;
               default: @(posedge clk) read_pointer = i;
@@ -160,8 +160,8 @@ module instr_register_test //declaram modul
 
     
     $display(" dupa  operand_a = %0d",   iw_reg_test[read_pointer].op_a);
-    $display("dupa   operand_b = %0d", iw_reg_test[read_pointer].op_b);
-    $display(" dupa rezultat = %0d", iw_reg_test[read_pointer].opc);
+    $display(" dupa  operand_b = %0d", iw_reg_test[read_pointer].op_b);
+    $display(" dupa  opcode = %0d", iw_reg_test[read_pointer].opc);
 
     if((iw_reg_test[read_pointer].op_a == instruction_word.op_a) && 
        (iw_reg_test[read_pointer].op_b == instruction_word.op_b) && 
