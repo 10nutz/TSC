@@ -4,5 +4,16 @@ call clean.bat
 call build.bat
 ::========================================================================================
 cd ../sim
-:: vsim -gui -do run.do
-vsim -c -do run.do
+
+::echo %1 %2 %3 %4 %5
+if "%6" == "gui" (
+    vsim -gui -do "do run.do %1 %2 %3 %4 %5" 
+) else (
+    if "%6" == "console" (
+        vsim -c -do "do run.do %1 %2 %3 %4 %5" 
+    ) else (
+        echo "The parameter must be gui or console"
+    )
+)
+
+::vsim -c -do run.do

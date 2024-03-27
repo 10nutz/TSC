@@ -29,8 +29,9 @@ module instr_register_test //declaram modul
   
   parameter WR_NR = 20;
   parameter RD_NR = 3;
-  int READ_ORDER;
-  int WRITE_ORDER;
+  parameter READ_ORDER = 1;
+  parameter WRITE_ORDER = 1;
+  parameter TEST_NAME = "test";
 
   initial begin
     $display("\n***********************************************************");
@@ -39,13 +40,14 @@ module instr_register_test //declaram modul
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
 
-    for (int read_order = 0; read_order < 3; read_order++) begin
-        for (int write_order = 0; write_order < 3; write_order++) begin
-            $display("\n***********************************************************");
-            $display("\nTesting with READ_ORDER = %0d, WRITE_ORDER = %0d\n", read_order, write_order);
+    //io 27.03.24 am modificat pentru a permite parametrii din run_test.bat
+    // for (int read_order = 0; read_order < 3; read_order++) begin
+    //     for (int write_order = 0; write_order < 3; write_order++) begin
+    //         $display("\n***********************************************************");
+    //         $display("\nTesting with READ_ORDER = %0d, WRITE_ORDER = %0d\n", read_order, write_order);
 
-            READ_ORDER = read_order;
-            WRITE_ORDER = write_order;
+    //         READ_ORDER = read_order;
+    //         WRITE_ORDER = write_order;
 
             $display("\nReseting the instruction register...");
             write_pointer  = 5'h00;         // initialize write pointer
@@ -82,11 +84,12 @@ module instr_register_test //declaram modul
               @(negedge clk) print_results;
                 check_result;
             end
-        end
-    end
+    //     end
+    // end
 
     @(posedge clk);
     $display("\nTeste trecute: %0d. Teste totale: %0d.", passed_tests, total_tests);
+    write_to_file;
     @(posedge clk) ;
     $display("\n***********************************************************");
     $display(  "***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***");
@@ -196,6 +199,21 @@ module instr_register_test //declaram modul
         $display("DATELE COMPARATE NU SUNT ACELEASI.\n");
     total_tests++; 
   endfunction: check_result
+
+  function void write_to_file;
+    int fd;
+
+    fd = $fopen("../reports/regression_status.txt", "a");
+    if(passed_tests == total_tests) begin
+      $fdisplay(fd, "%s : passed", TEST_NAME);
+    end
+    else begin
+      $fdisplay(fd, "%s : failed", TEST_NAME);
+    end
+
+    $fclose(fd);
+
+  endfunction: write_to_file
 
 
 //daca nu initializez iw_reg_test cu 0 va pica teste cand citeste de la o locatie de memorie la care nu s-a scris
