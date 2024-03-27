@@ -1,2 +1,4 @@
 case_rnd_rnd : failed
 case_inc_inc : passed
+case_rnd_rnd : failed
+case_inc_inc : passed

@@ -16,4 +16,5 @@ if "%6" == "gui" (
     )
 )
 
+cd ../tools
 ::vsim -c -do run.do
