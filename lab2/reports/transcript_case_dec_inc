@@ -1,6 +1,6 @@
 # 1
 # Model Technology ModelSim Microsemi vlog 10.5c Compiler 2016.07 Jul 21 2016
-# Start time: 10:41:44 on Mar 27,2024
+# Start time: 10:41:37 on Mar 27,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
@@ -10,10 +10,10 @@
 # 
 # Top level modules:
 # 	top
-# End time: 10:41:44 on Mar 27,2024, Elapsed time: 0:00:00
+# End time: 10:41:37 on Mar 27,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GTEST_NAME=case_rnd_rnd -GWR_NR=10 -GRD_NR=10 -GWRITE_ORDER=2 -GREAD_ORDER=2 
-# Start time: 10:41:44 on Mar 27,2024
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GTEST_NAME=case_dec_inc -GWR_NR=10 -GRD_NR=10 -GWRITE_ORDER=1 -GREAD_ORDER=0 
+# Start time: 10:41:37 on Mar 27,2024
 # //  ModelSim Microsemi 10.5c Jul 21 2016
 # //
 # //  Copyright 1991-2016 Mentor Graphics Corporation
@@ -38,71 +38,99 @@
 # Reseting the instruction register...
 # 
 # Writing values to register stack...
-# Writing to register location 4: 
+# Writing to register location 31: 
 #   opcode = 1 (PASSA) 44
 #   operand_a = -12 44
 #   operand_b = 7 44
 # 
-# Writing to register location 8: 
+# Writing to register location 30: 
 #   opcode = 0 (ZERO) 54
 #   operand_a = -9 54
 #   operand_b = 1 54
 # 
-# Writing to register location 7: 
+# Writing to register location 29: 
 #   opcode = 7 (MOD) 64
 #   operand_a = -15 64
 #   operand_b = 8 64
 # 
-# Writing to register location 21: 
+# Writing to register location 28: 
 #   opcode = 5 (MULT) 74
 #   operand_a = -8 74
 #   operand_b = 7 74
 # 
-# Writing to register location 3: 
+# Writing to register location 27: 
 #   opcode = 3 (ADD) 84
 #   operand_a = -9 84
 #   operand_b = 5 84
 # 
-# Writing to register location 28: 
+# Writing to register location 26: 
 #   opcode = 4 (SUB) 94
 #   operand_a = 5 94
 #   operand_b = 3 94
 # 
-# Writing to register location 3: 
+# Writing to register location 25: 
 #   opcode = 3 (ADD) 104
 #   operand_a = 3 104
 #   operand_b = 12 104
 # 
-# Writing to register location 30: 
+# Writing to register location 24: 
 #   opcode = 6 (DIV) 114
 #   operand_a = 12 114
 #   operand_b = 3 114
 # 
-# Writing to register location 25: 
+# Writing to register location 23: 
 #   opcode = 1 (PASSA) 124
 #   operand_a = 3 124
 #   operand_b = 14 124
 # 
-# Writing to register location 9: 
+# Writing to register location 22: 
 #   opcode = 1 (PASSA) 134
 #   operand_a = -2 134
 #   operand_b = 9 134
 # 
 # 
 # Reading back the same register locations written...
-# Read from register location 7: 
-#   opcode = 7 (MOD)
-#   operand_a = -15
-#   operand_b = 8
-#   rezultat = -7
-#  dupa  operand_a = -15
-#  dupa  operand_b = 8
-#  dupa  opcode = 7
-# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
-# Rezultatul asteptat: -7
-# REZULTATUL ESTE CEL ASTEPTAT
+# Read from register location 0: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
 # 
-# Read from register location 19: 
+# Read from register location 1: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 2: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 3: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 4: 
 #   opcode = 0 (ZERO)
 #   operand_a = 0
 #   operand_b = 0
@@ -122,7 +150,7 @@
 #  dupa  opcode = x
 # DATELE COMPARATE NU SUNT ACELEASI.
 # 
-# Read from register location 31: 
+# Read from register location 6: 
 #   opcode = 0 (ZERO)
 #   operand_a = 0
 #   operand_b = 0
@@ -132,37 +160,7 @@
 #  dupa  opcode = x
 # DATELE COMPARATE NU SUNT ACELEASI.
 # 
-# Read from register location 0: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-#   rezultat = 0
-#  dupa  operand_a = x
-#  dupa  operand_b = x
-#  dupa  opcode = x
-# DATELE COMPARATE NU SUNT ACELEASI.
-# 
-# Read from register location 14: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-#   rezultat = 0
-#  dupa  operand_a = x
-#  dupa  operand_b = x
-#  dupa  opcode = x
-# DATELE COMPARATE NU SUNT ACELEASI.
-# 
-# Read from register location 20: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-#   rezultat = 0
-#  dupa  operand_a = x
-#  dupa  operand_b = x
-#  dupa  opcode = x
-# DATELE COMPARATE NU SUNT ACELEASI.
-# 
-# Read from register location 19: 
+# Read from register location 7: 
 #   opcode = 0 (ZERO)
 #   operand_a = 0
 #   operand_b = 0
@@ -174,30 +172,26 @@
 # 
 # Read from register location 8: 
 #   opcode = 0 (ZERO)
-#   operand_a = -9
-#   operand_b = 1
+#   operand_a = 0
+#   operand_b = 0
 #   rezultat = 0
-#  dupa  operand_a = -9
-#  dupa  operand_b = 1
-#  dupa  opcode = 0
-# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
-# Rezultatul asteptat: 0
-# REZULTATUL ESTE CEL ASTEPTAT
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
 # 
-# Read from register location 28: 
-#   opcode = 4 (SUB)
-#   operand_a = 5
-#   operand_b = 3
-#   rezultat = 2
-#  dupa  operand_a = 5
-#  dupa  operand_b = 3
-#  dupa  opcode = 4
-# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
-# Rezultatul asteptat: 2
-# REZULTATUL ESTE CEL ASTEPTAT
+# Read from register location 9: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
 # 
 # 
-# Teste trecute: 3. Teste totale: 10.
+# Teste trecute: 0. Teste totale: 10.
 # 
 # ***********************************************************
 # ***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***
@@ -207,5 +201,5 @@
 # 
 # ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(99)
 #    Time: 256 ns  Iteration: 1  Instance: /top/test
-# End time: 10:41:45 on Mar 27,2024, Elapsed time: 0:00:01
+# End time: 10:41:38 on Mar 27,2024, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
