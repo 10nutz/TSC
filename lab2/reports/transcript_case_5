@@ -1,0 +1,675 @@
+# 1
+# Model Technology ModelSim Microsemi vlog 10.5c Compiler 2016.07 Jul 21 2016
+# Start time: 08:49:52 on Apr 10,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 08:49:52 on Apr 10,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GTEST_NAME=case_5 -GWR_NR=50 -GRD_NR=32 -GWRITE_ORDER=2 -GSEED_VAL=2269146168 -GREAD_ORDER=2 
+# Start time: 08:49:52 on Apr 10,2024
+# //  ModelSim Microsemi 10.5c Jul 21 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim Microsemi and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# 
+# ***********************************************************
+# ***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# 
+# Reseting the instruction register...
+# 
+# Writing values to register stack...
+# Writing to register location 4: 
+#   opcode = 0 (ZERO) 44
+#   operand_a = 0 44
+#   operand_b = 12 44
+# 
+# Writing to register location 24: 
+#   opcode = 0 (ZERO) 54
+#   operand_a = 12 54
+#   operand_b = 8 54
+# 
+# Writing to register location 19: 
+#   opcode = 3 (ADD) 64
+#   operand_a = 8 64
+#   operand_b = 8 64
+# 
+# Writing to register location 3: 
+#   opcode = 3 (ADD) 74
+#   operand_a = 8 74
+#   operand_b = 3 74
+# 
+# Writing to register location 29: 
+#   opcode = 5 (MULT) 84
+#   operand_a = -13 84
+#   operand_b = 3 84
+# 
+# Writing to register location 8: 
+#   opcode = 0 (ZERO) 94
+#   operand_a = 3 94
+#   operand_b = 13 94
+# 
+# Writing to register location 4: 
+#   opcode = 4 (SUB) 104
+#   operand_a = 13 104
+#   operand_b = 8 104
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 114
+#   operand_a = -8 114
+#   operand_b = 4 114
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 124
+#   operand_a = -12 124
+#   operand_b = 12 124
+# 
+# Writing to register location 22: 
+#   opcode = 6 (DIV) 134
+#   operand_a = -4 134
+#   operand_b = 12 134
+# 
+# Writing to register location 9: 
+#   opcode = 1 (PASSA) 144
+#   operand_a = -4 144
+#   operand_b = 6 144
+# 
+# Writing to register location 9: 
+#   opcode = 1 (PASSA) 154
+#   operand_a = 6 154
+#   operand_b = 9 154
+# 
+# Writing to register location 17: 
+#   opcode = 1 (PASSA) 164
+#   operand_a = 9 164
+#   operand_b = 9 164
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 174
+#   operand_a = 9 174
+#   operand_b = 1 174
+# 
+# Writing to register location 30: 
+#   opcode = 6 (DIV) 184
+#   operand_a = -15 184
+#   operand_b = 12 184
+# 
+# Writing to register location 5: 
+#   opcode = 5 (MULT) 194
+#   operand_a = 12 194
+#   operand_b = 14 194
+# 
+# Writing to register location 16: 
+#   opcode = 0 (ZERO) 204
+#   operand_a = 14 204
+#   operand_b = 5 204
+# 
+# Writing to register location 23: 
+#   opcode = 7 (MOD) 214
+#   operand_a = -11 214
+#   operand_b = 0 214
+# 
+# Writing to register location 23: 
+#   opcode = 7 (MOD) 224
+#   operand_a = 0 224
+#   operand_b = 7 224
+# 
+# Writing to register location 8: 
+#   opcode = 0 (ZERO) 234
+#   operand_a = -9 234
+#   operand_b = 7 234
+# 
+# Writing to register location 15: 
+#   opcode = 7 (MOD) 244
+#   operand_a = 7 244
+#   operand_b = 8 244
+# 
+# Writing to register location 15: 
+#   opcode = 7 (MOD) 254
+#   operand_a = -8 254
+#   operand_b = 15 254
+# 
+# Writing to register location 2: 
+#   opcode = 2 (PASSB) 264
+#   operand_a = -1 264
+#   operand_b = 15 264
+# 
+# Writing to register location 10: 
+#   opcode = 2 (PASSB) 274
+#   operand_a = -1 274
+#   operand_b = 2 274
+# 
+# Writing to register location 8: 
+#   opcode = 0 (ZERO) 284
+#   operand_a = -14 284
+#   operand_b = 10 284
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 294
+#   operand_a = -6 294
+#   operand_b = 8 294
+# 
+# Writing to register location 1: 
+#   opcode = 1 (PASSA) 304
+#   operand_a = 8 304
+#   operand_b = 12 304
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 314
+#   operand_a = -4 314
+#   operand_b = 1 314
+# 
+# Writing to register location 20: 
+#   opcode = 4 (SUB) 324
+#   operand_a = 1 324
+#   operand_b = 12 324
+# 
+# Writing to register location 30: 
+#   opcode = 6 (DIV) 334
+#   operand_a = 12 334
+#   operand_b = 4 334
+# 
+# Writing to register location 6: 
+#   opcode = 6 (DIV) 344
+#   operand_a = 4 344
+#   operand_b = 14 344
+# 
+# Writing to register location 26: 
+#   opcode = 2 (PASSB) 354
+#   operand_a = 14 354
+#   operand_b = 6 354
+# 
+# Writing to register location 4: 
+#   opcode = 4 (SUB) 364
+#   operand_a = 6 364
+#   operand_b = 10 364
+# 
+# Writing to register location 7: 
+#   opcode = 7 (MOD) 374
+#   operand_a = -6 374
+#   operand_b = 4 374
+# 
+# Writing to register location 13: 
+#   opcode = 5 (MULT) 384
+#   operand_a = 4 384
+#   operand_b = 7 384
+# 
+# Writing to register location 29: 
+#   opcode = 5 (MULT) 394
+#   operand_a = -9 394
+#   operand_b = 13 394
+# 
+# Writing to register location 17: 
+#   opcode = 1 (PASSA) 404
+#   operand_a = -3 404
+#   operand_b = 13 404
+# 
+# Writing to register location 7: 
+#   opcode = 7 (MOD) 414
+#   operand_a = -3 414
+#   operand_b = 1 414
+# 
+# Writing to register location 19: 
+#   opcode = 3 (ADD) 424
+#   operand_a = 1 424
+#   operand_b = 7 424
+# 
+# Writing to register location 12: 
+#   opcode = 4 (SUB) 434
+#   operand_a = 7 434
+#   operand_b = 3 434
+# 
+# Writing to register location 3: 
+#   opcode = 3 (ADD) 444
+#   operand_a = 3 444
+#   operand_b = 12 444
+# 
+# Writing to register location 21: 
+#   opcode = 5 (MULT) 454
+#   operand_a = -4 454
+#   operand_b = 3 454
+# 
+# Writing to register location 26: 
+#   opcode = 2 (PASSB) 464
+#   operand_a = 3 464
+#   operand_b = 5 464
+# 
+# Writing to register location 21: 
+#   opcode = 5 (MULT) 474
+#   operand_a = -11 474
+#   operand_b = 10 474
+# 
+# Writing to register location 29: 
+#   opcode = 5 (MULT) 484
+#   operand_a = -6 484
+#   operand_b = 5 484
+# 
+# Writing to register location 3: 
+#   opcode = 3 (ADD) 494
+#   operand_a = 5 494
+#   operand_b = 13 494
+# 
+# Writing to register location 19: 
+#   opcode = 3 (ADD) 504
+#   operand_a = 13 504
+#   operand_b = 3 504
+# 
+# Writing to register location 25: 
+#   opcode = 1 (PASSA) 514
+#   operand_a = 3 514
+#   operand_b = 3 514
+# 
+# Writing to register location 27: 
+#   opcode = 3 (ADD) 524
+#   operand_a = 3 524
+#   operand_b = 9 524
+# 
+# Writing to register location 24: 
+#   opcode = 0 (ZERO) 534
+#   operand_a = -7 534
+#   operand_b = 11 534
+# 
+# 
+# Reading back the same register locations written...
+# Read from register location 7: 
+#   opcode = 7 (MOD)
+#   operand_a = -3
+#   operand_b = 1
+#   rezultat = 0
+#  dupa  operand_a = -3
+#  dupa  operand_b = 1
+#  dupa  opcode = 7
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 18: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 18: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 5: 
+#   opcode = 5 (MULT)
+#   operand_a = 12
+#   operand_b = 14
+#   rezultat = 168
+#  dupa  operand_a = 12
+#  dupa  operand_b = 14
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 168
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 31: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 24: 
+#   opcode = 0 (ZERO)
+#   operand_a = -7
+#   operand_b = 11
+#   rezultat = 0
+#  dupa  operand_a = -7
+#  dupa  operand_b = 11
+#  dupa  opcode = 0
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 2: 
+#   opcode = 2 (PASSB)
+#   operand_a = -1
+#   operand_b = 15
+#   rezultat = 15
+#  dupa  operand_a = -1
+#  dupa  operand_b = 15
+#  dupa  opcode = 2
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 15
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 5: 
+#   opcode = 5 (MULT)
+#   operand_a = 12
+#   operand_b = 14
+#   rezultat = 168
+#  dupa  operand_a = 12
+#  dupa  operand_b = 14
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 168
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 14: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 7: 
+#   opcode = 7 (MOD)
+#   operand_a = -3
+#   operand_b = 1
+#   rezultat = 0
+#  dupa  operand_a = -3
+#  dupa  operand_b = 1
+#  dupa  opcode = 7
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 27: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 9
+#   rezultat = 12
+#  dupa  operand_a = 3
+#  dupa  operand_b = 9
+#  dupa  opcode = 3
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 12
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = 5
+#   operand_b = 13
+#   rezultat = 18
+#  dupa  operand_a = 5
+#  dupa  operand_b = 13
+#  dupa  opcode = 3
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 18
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 16: 
+#   opcode = 0 (ZERO)
+#   operand_a = 14
+#   operand_b = 5
+#   rezultat = 0
+#  dupa  operand_a = 14
+#  dupa  operand_b = 5
+#  dupa  opcode = 0
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = -14
+#   operand_b = 10
+#   rezultat = 0
+#  dupa  operand_a = -14
+#  dupa  operand_b = 10
+#  dupa  opcode = 0
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 20: 
+#   opcode = 4 (SUB)
+#   operand_a = 1
+#   operand_b = 12
+#   rezultat = -11
+#  dupa  operand_a = 1
+#  dupa  operand_b = 12
+#  dupa  opcode = 4
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -11
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 29: 
+#   opcode = 5 (MULT)
+#   operand_a = -6
+#   operand_b = 5
+#   rezultat = -30
+#  dupa  operand_a = -6
+#  dupa  operand_b = 5
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -30
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 1: 
+#   opcode = 1 (PASSA)
+#   operand_a = 8
+#   operand_b = 12
+#   rezultat = 8
+#  dupa  operand_a = 8
+#  dupa  operand_b = 12
+#  dupa  opcode = 1
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 8
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 21: 
+#   opcode = 5 (MULT)
+#   operand_a = -11
+#   operand_b = 10
+#   rezultat = -110
+#  dupa  operand_a = -11
+#  dupa  operand_b = 10
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -110
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 20: 
+#   opcode = 4 (SUB)
+#   operand_a = 1
+#   operand_b = 12
+#   rezultat = -11
+#  dupa  operand_a = 1
+#  dupa  operand_b = 12
+#  dupa  opcode = 4
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -11
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 31: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 12: 
+#   opcode = 4 (SUB)
+#   operand_a = 7
+#   operand_b = 3
+#   rezultat = 4
+#  dupa  operand_a = 7
+#  dupa  operand_b = 3
+#  dupa  opcode = 4
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 4
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 14: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 25: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 3
+#   rezultat = 3
+#  dupa  operand_a = 3
+#  dupa  operand_b = 3
+#  dupa  opcode = 1
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 3
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = -14
+#   operand_b = 10
+#   rezultat = 0
+#  dupa  operand_a = -14
+#  dupa  operand_b = 10
+#  dupa  opcode = 0
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 14: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   rezultat = 0
+#  dupa  operand_a = x
+#  dupa  operand_b = x
+#  dupa  opcode = x
+# DATELE COMPARATE NU SUNT ACELEASI.
+# 
+# Read from register location 23: 
+#   opcode = 7 (MOD)
+#   operand_a = 0
+#   operand_b = 7
+#   rezultat = 0
+#  dupa  operand_a = 0
+#  dupa  operand_b = 7
+#  dupa  opcode = 7
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 29: 
+#   opcode = 5 (MULT)
+#   operand_a = -6
+#   operand_b = 5
+#   rezultat = -30
+#  dupa  operand_a = -6
+#  dupa  operand_b = 5
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -30
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 23: 
+#   opcode = 7 (MOD)
+#   operand_a = 0
+#   operand_b = 7
+#   rezultat = 0
+#  dupa  operand_a = 0
+#  dupa  operand_b = 7
+#  dupa  opcode = 7
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 24: 
+#   opcode = 0 (ZERO)
+#   operand_a = -7
+#   operand_b = 11
+#   rezultat = 0
+#  dupa  operand_a = -7
+#  dupa  operand_b = 11
+#  dupa  opcode = 0
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 0
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 25: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 3
+#   rezultat = 3
+#  dupa  operand_a = 3
+#  dupa  operand_b = 3
+#  dupa  opcode = 1
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 3
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 13: 
+#   opcode = 5 (MULT)
+#   operand_a = 4
+#   operand_b = 7
+#   rezultat = 28
+#  dupa  operand_a = 4
+#  dupa  operand_b = 7
+#  dupa  opcode = 5
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: 28
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# Read from register location 17: 
+#   opcode = 1 (PASSA)
+#   operand_a = -3
+#   operand_b = 13
+#   rezultat = -3
+#  dupa  operand_a = -3
+#  dupa  operand_b = 13
+#  dupa  opcode = 1
+# DATELE COMPARATE SUNT ACELEASI, CALCULEZ REZULTATUL...
+# Rezultatul asteptat: -3
+# REZULTATUL ESTE CEL ASTEPTAT
+# 
+# 
+# Teste trecute: 25. Teste totale: 32.
+# 
+# ***********************************************************
+# ***  THIS IS A SELF-CHECKING TESTBENCH.  YOU DON'T      ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(102)
+#    Time: 876 ns  Iteration: 1  Instance: /top/test
+# End time: 08:49:53 on Apr 10,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

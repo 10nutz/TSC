@@ -20,7 +20,7 @@ module instr_register_test //declaram modul
 
   timeunit 1ns/1ns; //o ns cu pas de o ns
 
-  int seed = 555;
+  
   int passed_tests = 0;
   int total_tests = 0;
 
@@ -32,6 +32,9 @@ module instr_register_test //declaram modul
   parameter READ_ORDER = 1;
   parameter WRITE_ORDER = 1;
   parameter TEST_NAME = "test";
+  parameter SEED_VAL;
+
+  int seed = SEED_VAL;
 
   initial begin
     $display("\n***********************************************************");
@@ -189,11 +192,11 @@ module instr_register_test //declaram modul
 
       $display("Rezultatul asteptat: %0d", rezultat_test);
       if(rezultat_test === instruction_word.rezultat) begin
-        $display("REZULTATUL ESTE CEL ASTEPTAT\n");
+        $display("REZULTATUL ESTE CEL ASTEPTAT -> PASSED\n");
         passed_tests++;
       end
       else
-        $display("REZULTATUL NU ESTE CEL ASTEPTAT\n");
+        $display("REZULTATUL NU ESTE CEL ASTEPTAT -> FAILED\n");
     end
     else
         $display("DATELE COMPARATE NU SUNT ACELEASI.\n");

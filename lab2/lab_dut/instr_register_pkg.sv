@@ -13,7 +13,8 @@ package instr_register_pkg; //declara package
     SUB,
     MULT,
     DIV,
-    MOD
+    MOD,
+    POW
   } opcode_t; //operatiile dut-ului
 
   typedef logic signed [31:0] operand_t;

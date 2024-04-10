@@ -7,10 +7,10 @@ cd ../sim
 
 ::echo %1 %2 %3 %4 %5
 if "%6" == "gui" (
-    vsim -gui -do "do run.do %1 %2 %3 %4 %5" 
+    vsim -gui -do "do run.do %1 %2 %3 %4 %5 %7" 
 ) else (
     if "%6" == "console" (
-        vsim -c -do "do run.do %1 %2 %3 %4 %5" 
+        vsim -c -do "do run.do %1 %2 %3 %4 %5 %7" 
     ) else (
         echo "The parameter must be gui or console"
     )
