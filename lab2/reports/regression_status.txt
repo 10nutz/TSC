@@ -1,10 +1,1 @@
-case_1 : failed
-case_2 : failed
-case_3 : failed
-case_4 : failed
-case_5 : failed
-case_6 : failed
-case_7 : failed
-case_8 : failed
-case_9 : failed
-case_10 : failed
+case_1 : passed

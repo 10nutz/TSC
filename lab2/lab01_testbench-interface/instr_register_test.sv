@@ -57,6 +57,8 @@ module instr_register_test //declaram modul
             read_pointer   = 5'h1F;         // initialize read pointer
             load_en        = 1'b0;          // initialize load control line
             reset_n       <= 1'b0;          // assert reset_n (active low)
+            foreach (iw_reg_test[i])
+              iw_reg_test[i] = '{opc:ZERO,default:0};  // reset to all zeros //initializare structuri - default pt celelalte variabile ce raman
             repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles //e test clock din top  
             reset_n        = 1'b1;          // deassert reset_n (active low)
 
@@ -137,7 +139,7 @@ module instr_register_test //declaram modul
 
     operand_a     = $random(seed)%16;                 // between -15 and 15 - random returneaza o valoare pe 32 de biti
     operand_b     = $unsigned($random)%16;            // between 0 and 15
-    opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+    opcode        = opcode_t'($unsigned($random)%9);  // between 0 and 8, cast to opcode_t type
    
     iw_reg_test[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}}; // <= nebloncanta = blocanta
 
@@ -182,24 +184,34 @@ module instr_register_test //declaram modul
         ADD: rezultat_test = iw_reg_test[read_pointer].op_a + iw_reg_test[read_pointer].op_b;
         SUB: rezultat_test = iw_reg_test[read_pointer].op_a - iw_reg_test[read_pointer].op_b;
         MULT: rezultat_test = iw_reg_test[read_pointer].op_a * iw_reg_test[read_pointer].op_b;
-        DIV: if (iw_reg_test[read_pointer].op_b == {64{1'b0}})
-               rezultat_test = {64{1'b0}}; 
-             else
-               rezultat_test = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;
-        MOD: rezultat_test = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
+        DIV: 
+            if (iw_reg_test[read_pointer].op_b == {64{1'b0}})
+                rezultat_test = {64{1'b0}}; 
+            else
+                rezultat_test = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;
+        MOD:
+            if (iw_reg_test[read_pointer].op_b == {64{1'b0}})
+                  rezultat_test = {64{1'b0}}; 
+                else 
+                  rezultat_test = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
+        POW:
+            if (iw_reg_test[read_pointer].op_a == {64{1'b0}})
+                  rezultat_test = {64{1'b0}}; 
+                else 
+                  rezultat_test = iw_reg_test[read_pointer].op_a ** iw_reg_test[read_pointer].op_b;
         default: rezultat_test = {64{1'b0}};
       endcase
 
       $display("Rezultatul asteptat: %0d", rezultat_test);
       if(rezultat_test === instruction_word.rezultat) begin
-        $display("REZULTATUL ESTE CEL ASTEPTAT -> PASSED\n");
+        $display("REZULTATUL ESTE CEL ASTEPTAT -> PASSED at %t\n", $time);
         passed_tests++;
       end
       else
-        $display("REZULTATUL NU ESTE CEL ASTEPTAT -> FAILED\n");
+        $display("REZULTATUL NU ESTE CEL ASTEPTAT -> FAILED at %t\n", $time);
     end
     else
-        $display("DATELE COMPARATE NU SUNT ACELEASI.\n");
+        $display("DATELE COMPARATE NU SUNT ACELEASI. -> FAILED at %t\n", $time);
     total_tests++; 
   endfunction: check_result
 

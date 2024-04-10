@@ -8,7 +8,7 @@
 @REM call .\run_test.bat 10 10 2 1 case_rnd_dec console
 @REM call .\run_test.bat 10 10 2 2 case_rnd_rnd console
 
-call .\run_test.bat 50 32 2 2 case_1 gui 3980105688
+call .\run_test.bat 100 50 2 2 case_1 console 3980105688
 @REM call .\run_test.bat 50 32 2 2 case_2 console 2448294078
 @REM call .\run_test.bat 50 32 2 2 case_3 console 1095018758
 @REM call .\run_test.bat 50 32 2 2 case_4 console 739575853
